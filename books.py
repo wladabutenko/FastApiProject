@@ -19,7 +19,6 @@ def get_db():
 
 
 class Book(BaseModel):
-    id: UUID
     title: str = Field(min_length=1)
     author: str = Field(min_length=1, max_length=100)
     description: str = Field(min_length=1, max_length=100)
@@ -55,7 +54,7 @@ def update_book(book_id: int, book: Book, db: Session = Depends(get_db)):
     if book_model is None:
         raise HTTPException(
             status_code=404,
-            detail=f"ID {book_id} : Does not exist"
+            detail=f"ID {book_id}: Does not exist"
         )
 
     book_model.title = book.title
